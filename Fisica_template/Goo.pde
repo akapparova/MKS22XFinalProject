@@ -56,4 +56,8 @@ public class Goo extends FBody{
     return shape.getY();
   }
   
+  public void setStatic(boolean bool){
+    shape.setStatic(bool);
+  }
+  
 }

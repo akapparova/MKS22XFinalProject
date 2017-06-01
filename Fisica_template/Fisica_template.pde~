@@ -58,9 +58,13 @@ void setup(){
     aC.setFrequency(0.001);
     world.add(aC);
     
+<<<<<<< HEAD
     FCompound start = new FCompound(); //connecting them all together into one shape
+=======
 
     /*
+    FCompound start = new FCompound();
+>>>>>>> 864f071fdc090c5cbbd247fdd53ef1d4613c7efa
     
      start.addBody(a.getShape());
      start.addBody(b.getShape());
