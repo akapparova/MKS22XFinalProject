@@ -18,36 +18,57 @@ void setup(){
     
     b.setPosition(300,height-400);
     
+    c.setStatic(true);
     c.setPosition(250,height-500);
-    
+
+    /*
     FLine aB = new FLine(a.getX(), a.getY(), b.getX(), b.getY());
     FLine aC = new FLine(a.getX(), a.getY(), c.getX(), c.getY());
     FLine bC = new FLine(b.getX(), b.getY(), c.getX(), c.getY());
+*/
 
+    world.add(a.getShape());
+    world.add(b.getShape());
+    world.add(c.getShape());
+
+    FDistanceJoint aB = new FDistanceJoint(a.getShape(), b.getShape());
+    aB.setLength(60);
+    aB.setStroke(0);
+    aB.setFill(#F5B502);
+    aB.setStrokeColor(#F5B502);
+    aB.setDrawable(true);
+    aB.setFrequency(0.001);
+    world.add(aB);
     
+    FDistanceJoint bC = new FDistanceJoint(c.getShape(), b.getShape());
+    bC.setLength(60);
+    bC.setStroke(0);
+    bC.setFill(#F5B502);
+    bC.setStrokeColor(#F5B502);
+    bC.setDrawable(true);
+    bC.setFrequency(0.001);
+    world.add(bC);
+    
+    FDistanceJoint aC = new FDistanceJoint(a.getShape(), c.getShape());
+    aC.setLength(60);
+    aC.setStroke(0);
+    aC.setFill(#F5B502);
+    aC.setStrokeColor(#F5B502);
+    aC.setDrawable(true);
+    aC.setFrequency(0.001);
+    world.add(aC);
+    
+
+    /*
     FCompound start = new FCompound();
     
      start.addBody(a.getShape());
      start.addBody(b.getShape());
      start.addBody(c.getShape());
-     start.addBody(aB);
-     start.addBody(aC);
-     start.addBody(bC);
-
      world.add(start);
-        
-/*    FRevoluteJoint l = new FRevoluteJoint(a,b);
-    FRevoluteJoint m = new FRevoluteJoint(c,b);
-    FRevoluteJoint n = new FRevoluteJoint(a,c);
-    l.setReferenceAngle(0);
-    m.setReferenceAngle(120);
-    n.setReferenceAngle(60);
-
-
-    world.add(l);
-    world.add(m);
-    world.add(n);
     */
+
+    
 }
 
 
