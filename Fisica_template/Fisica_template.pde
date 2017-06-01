@@ -5,7 +5,7 @@ FWorld world;
 void setup(){
   size(500,500);
   smooth();
-  Fisica.init(this);
+  Fisica.init(this); //what does this do!
   world = new FWorld();
   world.setGravity(0,800);
   world.setEdges();
@@ -25,7 +25,7 @@ void setup(){
     FLine bC = new FLine(b.getX(), b.getY(), c.getX(), c.getY());
 
     
-    FCompound start = new FCompound();
+    FCompound start = new FCompound(); //connecting them all together into one shape
     
      start.addBody(a.getShape());
      start.addBody(b.getShape());
