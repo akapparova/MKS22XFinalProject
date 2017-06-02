@@ -8,7 +8,7 @@ void setup(){
   smooth();
   Fisica.init(this);
   world = new FWorld();
-  world.setGravity(0,800);
+  world.setGravity(0,799);
   world.setEdges();
   world.remove(world.top);
 
