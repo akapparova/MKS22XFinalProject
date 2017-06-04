@@ -9,20 +9,19 @@ class Structure {
     gooo.add(x);
   }
 
-  public FBody getTouching(FBody x) {
-    FBody ans = null;
+  public Goo getTouching(FBody x) {
+    Goo ans = null;
     boolean f = false;
     for (Goo y : gooo) {
       if (y.getShape().isTouchingBody(x)) {
-        ans = y.getShape();
-        x.setFill(20,40,20);
+        ans = y;
+        x.setFill(20, 40, 20);
         f = true;
       }
     }
-    if(!f){
-      x.setFill(1000,1000,1000);
+    if (!f) {
+      x.setFill(1000, 1000, 1000);
     }
     return ans;
   }
-  
 }
