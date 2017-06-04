@@ -5,7 +5,7 @@ public class Goo extends FBody {
 
   public Goo() {
     shape = new FCircle(40);
-    connected = false;
+    connected = true;
     start = false;
   }
 
@@ -18,7 +18,7 @@ public class Goo extends FBody {
   public Goo(boolean bool) {
     shape = new FCircle(40);
     connected = bool;
-    start = true;
+    start = false;
   }
 
   void draw() {

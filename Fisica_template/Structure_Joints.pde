@@ -10,14 +10,17 @@ class Structure_Joints {
   }
 
   public void checkJoints() {
+    FDistanceJoint rem = null;
     for (FDistanceJoint y : js) {
-      if (dist(y.getAnchor1X(), y.getAnchor1Y(), y.getAnchor2X(), y.getAnchor2X()) > 400) {
-        println(y.getAnchor1X() + " " + y.getAnchor2X());
+      if (dist(y.getAnchor1X(), y.getAnchor1Y(), y.getAnchor2X(), y.getAnchor2X()) > 300) {
+        rem = y;
         y.removeFromWorld();
       }
     }
+    if (rem != null) {
+      js.remove(rem);
+    }
   }
+
   
- /* public void doesNotHave(FDistanceJoint x){
-  }*/
 }

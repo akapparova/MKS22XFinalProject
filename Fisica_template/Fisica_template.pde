@@ -5,13 +5,14 @@ FBox goal;
 FCircle mouse;
 Structure start;
 Structure_Joints start_Joints;
+Goo b;
 
 void setup() {
   size(800, 500);
   smooth();
   Fisica.init(this);
   world = new FWorld();
-  world.setGravity(0, 799);
+  world.setGravity(0, 800);
   world.setEdges();
   world.remove(world.top);
   //
@@ -29,7 +30,7 @@ void setup() {
   start_Joints = new Structure_Joints();
   //
   Goo a = new Goo(true);
-  Goo b = new Goo(true);
+  b = new Goo(true);//
   Goo c = new Goo(true);
   a.setPosition(400, height-20); 
   b.setPosition(200, height-20);
@@ -92,9 +93,8 @@ void draw() {
   mouse.setPosition(mouseX, mouseY);
   //
   FDistanceJoint aC;
-  if (start.getTouching(mouse) != null) {
-    println(start.getTouching(mouse));
-    aC = new FDistanceJoint(mouse, start.getTouching(mouse));
+  if (start.getTouching(mouse) != null && start.getTouching(mouse).connected) {
+    aC = new FDistanceJoint(mouse, start.getTouching(mouse).getShape());
     aC.setLength(60);
     aC.setStroke(0);
     aC.setFill(#F5B502);
@@ -105,9 +105,43 @@ void draw() {
     world.add(aC);
   }
   start_Joints.checkJoints();
-  //
 }
 
 
-public void addGoo() {
+public Goo addGoo(float x, float y) {
+  Goo g = new Goo(false);
+  g.setPosition(x, y);
+  world.add(g.getShape());
+  g.setGrabbable(false);
+  start.add(g);
+  return g;
+}
+
+void keyReleased() {
+  if (key == 'G' || key == 'g') {
+    // try{
+    Goo x = addGoo(mouseX, mouseY);
+    /*
+    FDistanceJoint aC = new FDistanceJoint(x.getShape(), start.getTouching(mouse).getShape());
+     aC.setLength(60);
+     aC.setStroke(0);
+     aC.setFill(#F5B502);
+     aC.setStrokeColor(#F5B502);
+     aC.setDrawable(true);
+     aC.setFrequency(1);
+     start_Joints.add(aC);
+     world.add(aC);
+     }
+     catch(NullPointerException e){}*/
+    try {
+      FConstantVolumeJoint aC = new FConstantVolumeJoint();
+      aC.setStrokeColor(#F5B502);
+      aC.addBody(x.getShape());
+      aC.addBody(start.getTouching(mouse).getShape());
+      aC.addBody(b.getShape());
+      world.add(aC);
+    }
+    catch(NullPointerException e) {
+    }
+  }
 }
