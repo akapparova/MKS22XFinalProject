@@ -4,6 +4,7 @@ FWorld world;
 FBox goal;
 FCircle mouse;
 Structure start;
+Structure_Joints start_Joints;
 
 void setup() {
   size(800, 500);
@@ -25,6 +26,7 @@ void setup() {
   world.add(mouse);
   //
   start = new Structure();
+  start_Joints = new Structure_Joints();
   //
   Goo a = new Goo(true);
   Goo b = new Goo(true);
@@ -44,8 +46,6 @@ void setup() {
   start.add(a);
   start.add(b);
   start.add(c);
-
-
   //
   FDistanceJoint aB = new FDistanceJoint(a.getShape(), b.getShape());
   aB.setLength(60);
@@ -89,20 +89,23 @@ void draw() {
   background(255);
   world.step();
   world.draw();
-
   mouse.setPosition(mouseX, mouseY);
-
+  //
+  FDistanceJoint aC;
   if (start.getTouching(mouse) != null) {
     println(start.getTouching(mouse));
-    FDistanceJoint aC = new FDistanceJoint(mouse, start.getTouching(mouse));
+    aC = new FDistanceJoint(mouse, start.getTouching(mouse));
     aC.setLength(60);
     aC.setStroke(0);
     aC.setFill(#F5B502);
     aC.setStrokeColor(#F5B502);
     aC.setDrawable(true);
     aC.setFrequency(0.001);
+    start_Joints.add(aC);
     world.add(aC);
   }
+  start_Joints.checkJoints();
+  //
 }
 
 
