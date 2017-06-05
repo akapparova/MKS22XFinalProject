@@ -1,5 +1,5 @@
 # World of Gui
-## Group: Kappleetely Broken (Vivien Lee, Asim Kapparova, MKS22X Period 6)
+## Group: KappLeetely Broken (Vivien Lee, Asim Kapparova, MKS22X Period 6)
 
 ---
 
@@ -9,9 +9,14 @@
 
 
 ## Features/Instructions
+Instructions:
 * Import Fisica library into Processing <http://www.ricardmarxer.com/fisica/>
 * Run Fisica_Template/Fisica_Template.pde in the Processing IDE
 * Press 'G' key to add goo to your structure
+
+Features:
+* Ability to build structures from goo
+* other stuff
 
 ## Bugs
 
