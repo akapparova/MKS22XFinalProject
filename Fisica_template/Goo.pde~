@@ -59,12 +59,16 @@ public class Goo extends FBody {
   public void setStatic(boolean bool) {
     shape.setStatic(bool);
   }
+<<<<<<< HEAD
   
   public void setGrabbable(boolean bool){
     shape.setGrabbable(bool);
   }
   
+=======
+
   public void setGrabbable(boolean bool) {
     shape.setGrabbable(bool);
   }
+>>>>>>> 7a1dd326580a7b6944320bf2d8fd50520e321839
 }
