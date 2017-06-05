@@ -7,20 +7,22 @@ class Structure_Joints {
 
   public void add(FDistanceJoint x) {
     js.add(x);
+    println(js.size());
   }
 
   public void checkJoints() {
-    FDistanceJoint rem = null;
+    ArrayList<FDistanceJoint> rem = new ArrayList<FDistanceJoint>();
     for (FDistanceJoint y : js) {
       if (dist(y.getAnchor1X(), y.getAnchor1Y(), y.getAnchor2X(), y.getAnchor2X()) > 300) {
-        rem = y;
+        rem.add(y);
         y.removeFromWorld();
       }
     }
-    if (rem != null) {
-      js.remove(rem);
+    if (rem.size() != 0) {
+      for (FDistanceJoint y : rem) {
+        js.remove(y);
+        js.trimToSize();
+      }
     }
   }
-
-  
 }
