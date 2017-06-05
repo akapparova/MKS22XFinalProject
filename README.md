@@ -13,8 +13,9 @@
 * Run Fisica_Template/Fisica_Template.pde in the Processing IDE
 * Press 'G' key to add goo to your structure
 
-
+### Bugs
 
 ### Development Log
 
-####
+#### 06/05/17
+* Player can add goo to structure and build towards the top
