@@ -100,7 +100,7 @@ void draw() {
     aC.setFill(#F5B502);
     aC.setStrokeColor(#F5B502);
     aC.setDrawable(true);
-    aC.setFrequency(0.001);
+    aC.setFrequency(0.00000001);
     start_Joints.add(aC);
     world.add(aC);
   }
@@ -138,8 +138,9 @@ void keyReleased() {
       aC.setStrokeColor(#F5B502);
       aC.addBody(x.getShape());
       aC.addBody(start.getTouching(mouse).getShape());
-      aC.addBody(b.getShape());
+      aC.addBody(b.getShape());      /////////////////CHANGE THIS!!!!!!!!!!!!!!!!!!!!!!!!
       world.add(aC);
+      x.connected = true;
     }
     catch(NullPointerException e) {
     }
