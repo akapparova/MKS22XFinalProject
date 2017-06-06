@@ -2,19 +2,29 @@ import fisica.*; //<>// //<>//
 
 FWorld world;
 FBox goal;
+FBox onLevel;
 FCircle mouse;
 Structure start;
 Structure_Joints start_Joints;
 Goo b;
+int level = 0;
+
+public void setLevel(){
+  if(level < 2){
+    level++;
+  }
+}
 
 void setup() {
-  size(800, 500);
+  size(1000, 600);
   smooth();
   Fisica.init(this);
   world = new FWorld();
   world.setGravity(0, 800);
   world.setEdges();
   world.remove(world.top);
+  world.remove(world.left);
+  world.remove(world.right);
   //
   goal = new FBox(100, 50);
   goal.setPosition(300, height-450);
@@ -25,6 +35,9 @@ void setup() {
   //
   mouse = new FCircle(20);
   world.add(mouse);
+  //
+  onLevel = new FBox (50,50);
+  //onLevel.setPosition(
   //
   start = new Structure();
   start_Joints = new Structure_Joints();
@@ -83,7 +96,9 @@ void setup() {
    start.addBody(c.getShape());
    world.add(start);
    */
-}
+  }
+
+
 
 
 void draw() {
@@ -109,6 +124,10 @@ void draw() {
    }
   }
   start_Joints.checkJoints();
+  
+  if(start.reachedGoal(goal)){
+    setLevel();
+  }
 }
 
 
