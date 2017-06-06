@@ -37,7 +37,11 @@ void setup() {
   world.add(mouse);
   //
   onLevel = new FBox (50,50);
-  //onLevel.setPosition(
+  onLevel.setPosition(700,height-450);
+  onLevel.setStatic(true);
+  onLevel.setFill(12,12,12);
+  onLevel.setGrabbable(false);
+  world.add(onLevel);
   //
   start = new Structure();
   start_Joints = new Structure_Joints();
@@ -161,7 +165,11 @@ void keyReleased() {
       aC.setStrokeColor(#F5B502);
       aC.addBody(x.getShape());
       aC.addBody(start_Joints.js.get(0).getBody2());
-      aC.addBody(start_Joints.js.get(1).getBody2());      /////////////////CHANGE THIS!!!!!!!!!!!!!!!!!!!!!!!!
+      aC.addBody(start_Joints.js.get(1).getBody2());    
+        //catch the index out of bounds 
+        //exception. happens when you try to add a goo,
+        //but you are not connected to two goos. Only one
+              /////////////////CHANGE THIS!!!!!!!!!!!!!!!!!!!!!!!!
       world.add(aC);
       x.connected = true;
     }
