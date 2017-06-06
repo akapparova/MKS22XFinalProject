@@ -23,7 +23,7 @@ void setup() {
   goal.setGrabbable(false);
   world.add(goal);
   //
-  mouse = new FCircle(200);
+  mouse = new FCircle(20);
   world.add(mouse);
   //
   start = new Structure();
@@ -48,32 +48,32 @@ void setup() {
   start.add(b);
   start.add(c);
   //
-  FDistanceJoint aB = new FDistanceJoint(a.getShape(), b.getShape());
+  FDistanceJoint1 aB = new FDistanceJoint1(a.getShape(), b.getShape());
   aB.setLength(60);
   aB.setStroke(0);
   aB.setFill(#F5B502);
   aB.setStrokeColor(#F5B502);
   aB.setDrawable(true);
   aB.setFrequency(0.001);
-  world.add(aB);
+  world.add(aB.x);
   //  
-  FDistanceJoint bC = new FDistanceJoint(c.getShape(), b.getShape());
+  FDistanceJoint1 bC = new FDistanceJoint1(c.getShape(), b.getShape());
   bC.setLength(60);
   bC.setStroke(0);
   bC.setFill(#F5B502);
   bC.setStrokeColor(#F5B502);
   bC.setDrawable(true);
   bC.setFrequency(0.001);
-  world.add(bC);
+  world.add(bC.x);
   //
-  FDistanceJoint aC = new FDistanceJoint(a.getShape(), c.getShape());
+  FDistanceJoint1 aC = new FDistanceJoint1(a.getShape(), c.getShape());
   aC.setLength(60);
   aC.setStroke(0);
   aC.setFill(#F5B502);
   aC.setStrokeColor(#F5B502);
   aC.setDrawable(true);
   aC.setFrequency(0.001);
-  world.add(aC);
+  world.add(aC.x);
 
 
   /*
@@ -92,17 +92,21 @@ void draw() {
   world.draw();
   mouse.setPosition(mouseX, mouseY);
   //
-  FDistanceJoint aC;
-  if (start.getTouching(mouse) != null && start.getTouching(mouse).connected) {
-    aC = new FDistanceJoint(mouse, start.getTouching(mouse).getShape());
-    aC.setLength(60);
-    aC.setStroke(0);
-    aC.setFill(#F5B502);
-    aC.setStrokeColor(#F5B502);
-    aC.setDrawable(true);
-    aC.setFrequency(0.00000001);
-    start_Joints.add(aC);
-    world.add(aC);
+  FDistanceJoint1 aC;
+  if (start.getTouching(mouse) != null && start.getTouching(mouse).connected && start_Joints.js.size() < 2) {
+    aC = new FDistanceJoint1(mouse, start.getTouching(mouse).getShape());
+
+   if (start_Joints.doesNotHave(aC)){
+      aC.setLength(60);
+      aC.setStroke(0);
+      aC.setFill(#F5B502);
+      aC.setStrokeColor(#F5B502);
+      aC.setDrawable(true);
+      aC.setFrequency(0.00000001);
+      start_Joints.add(aC);
+      world.add(aC.x);
+      //println(aC.getBody1());
+   }
   }
   start_Joints.checkJoints();
 }
@@ -122,7 +126,7 @@ void keyReleased() {
     // try{
     Goo x = addGoo(mouseX, mouseY);
     /*
-    FDistanceJoint aC = new FDistanceJoint(x.getShape(), start.getTouching(mouse).getShape());
+    FDistanceJoint1 aC = new FDistanceJoint1(x.getShape(), start.getTouching(mouse).getShape());
      aC.setLength(60);
      aC.setStroke(0);
      aC.setFill(#F5B502);
@@ -137,8 +141,8 @@ void keyReleased() {
       FConstantVolumeJoint aC = new FConstantVolumeJoint();
       aC.setStrokeColor(#F5B502);
       aC.addBody(x.getShape());
-      aC.addBody(start.getTouching(mouse).getShape());
-      aC.addBody(b.getShape());      /////////////////CHANGE THIS!!!!!!!!!!!!!!!!!!!!!!!!
+      aC.addBody(start_Joints.js.get(0).getBody2());
+      aC.addBody(start_Joints.js.get(1).getBody2());      /////////////////CHANGE THIS!!!!!!!!!!!!!!!!!!!!!!!!
       world.add(aC);
       x.connected = true;
     }
