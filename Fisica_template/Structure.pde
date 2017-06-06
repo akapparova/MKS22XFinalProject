@@ -24,4 +24,15 @@ class Structure {
     }
     return ans;
   }
+  
+  public boolean reachedGoal(FBox reached){
+    boolean ans = false;
+    for (Goo g : gooo){
+      if (g.isTouchingBody(reached)){
+        ans = true;
+      }
+    }
+    return ans;
+  }
+        
 }
