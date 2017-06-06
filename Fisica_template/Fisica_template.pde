@@ -173,7 +173,8 @@ void keyReleased() {
       world.add(aC);
       x.connected = true;
     }
-    catch(NullPointerException e) {
+    catch(IndexOutOfBoundsException e) {
+      world.remove(x.getShape());
     }
   }
 }
