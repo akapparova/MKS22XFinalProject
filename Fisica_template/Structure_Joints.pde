@@ -7,7 +7,6 @@ class Structure_Joints {
 
   public void add(FDistanceJoint1 x) {
     js.add(x);
-    println(js.size());
     //println(x.getBody1() + " " + x.getBody2());
   }
 
