@@ -5,18 +5,21 @@ public class Goo extends FBody {
 
   public Goo() {
     shape = new FCircle(40);
+    shape.setDensity(200);
     connected = true;
     start = false;
   }
 
   public Goo(FCircle circle) {
     shape = circle;
+    shape.setDensity(200);
     connected = false;
     start = false;
   }
 
   public Goo(boolean bool) {
     shape = new FCircle(40);
+    shape.setDensity(200);
     connected = bool;
     start = false;
   }
