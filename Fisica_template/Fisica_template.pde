@@ -6,7 +6,7 @@ FBox onLevel;
 FCircle mouse;
 Structure start;
 Structure_Joints start_Joints;
-Goo b;
+Goo a,b,c;
 int level = 0;
 
 public void setLevel(){
@@ -27,7 +27,7 @@ void setup() {
   world.remove(world.right);
   //
   goal = new FBox(100, 50);
-  goal.setPosition(300, height-450);
+  goal.setPosition(300, height-600);
   goal.setStatic(true);
   goal.setFill(10, 150, 10);
   goal.setGrabbable(false);
@@ -37,7 +37,7 @@ void setup() {
   world.add(mouse);
   //
   onLevel = new FBox (50,50);
-  onLevel.setPosition(700,height-450);
+  onLevel.setPosition(700,height-600);
   onLevel.setStatic(true);
   onLevel.setFill(12,12,12);
   onLevel.setGrabbable(false);
@@ -46,9 +46,9 @@ void setup() {
   start = new Structure();
   start_Joints = new Structure_Joints();
   //
-  Goo a = new Goo(true);
+  a = new Goo(true);
   b = new Goo(true);//
-  Goo c = new Goo(true);
+  c = new Goo(true);
   a.setPosition(400, height-20); 
   b.setPosition(200, height-20);
   c.setPosition(300, height-200);
@@ -132,6 +132,10 @@ void draw() {
   if(start.reachedGoal(goal)){
     setLevel();
   }
+  
+  a.setPosition(400, height-20); 
+  b.setPosition(200, height-20);
+  c.setPosition(300, height-200);
 }
 
 
