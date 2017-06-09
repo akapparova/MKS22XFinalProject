@@ -138,7 +138,7 @@ void draw() {
   a.setPosition(400, height-20); 
   b.setPosition(200, height-20);
   c.setPosition(300, height-200);
-  
+
   checkForces();
 }
 
@@ -190,10 +190,18 @@ void keyReleased() {
 
 
 void checkForces() {
-  if(cvj.size() > 0){System.out.println(cvj.get(0).getReactionForceX() + cvj.get(0).getReactionForceY());}
-  for (FConstantVolumeJoint y : cvj) {
-    if (y.getReactionForceX() > 300) {
-      y.removeFromWorld();
+  try {
+    if (start.size() > 3) {
+      System.out.println(start.get(3).getForceX() + start.get(3).getForceY());
+      start.get(3).getShape().setFill(20,40,20);
     }
+
+    /*   for (FConstantVolumeJoint y : cvj) {
+     if (y.getReactionForceX() > 300) {
+     y.removeFromWorld();
+     }
+     }*/
+  }
+  catch(NullPointerException e) {
   }
 }
