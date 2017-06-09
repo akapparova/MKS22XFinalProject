@@ -6,16 +6,18 @@ FBox onLevel;
 FCircle mouse;
 Structure start;
 Structure_Joints start_Joints;
-Goo a,b,c;
+Goo a, b, c;
 int level = 0;
+ArrayList<FConstantVolumeJoint> cvj;
 
-public void setLevel(){
-  if(level < 2){
+public void setLevel() {
+  if (level < 2) {
     level++;
   }
 }
 
 void setup() {
+  cvj = new ArrayList<FConstantVolumeJoint>();
   size(1000, 600);
   smooth();
   Fisica.init(this);
@@ -36,10 +38,10 @@ void setup() {
   mouse = new FCircle(20);
   world.add(mouse);
   //
-  onLevel = new FBox (50,50);
-  onLevel.setPosition(700,height-600);
+  onLevel = new FBox (50, 50);
+  onLevel.setPosition(700, height-600);
   onLevel.setStatic(true);
-  onLevel.setFill(12,12,12);
+  onLevel.setFill(12, 12, 12);
   onLevel.setGrabbable(false);
   world.add(onLevel);
   //
@@ -100,7 +102,7 @@ void setup() {
    start.addBody(c.getShape());
    world.add(start);
    */
-  }
+}
 
 
 
@@ -115,7 +117,7 @@ void draw() {
   if (start.getTouching(mouse) != null && start.getTouching(mouse).connected && start_Joints.js.size() < 2) {
     aC = new FDistanceJoint1(mouse, start.getTouching(mouse).getShape());
 
-   if (start_Joints.doesNotHave(aC)){
+    if (start_Joints.doesNotHave(aC)) {
       aC.setLength(60);
       aC.setStroke(0);
       aC.setFill(#F5B502);
@@ -125,17 +127,19 @@ void draw() {
       start_Joints.add(aC);
       world.add(aC.x);
       //println(aC.getBody1());
-   }
+    }
   }
   start_Joints.checkJoints();
-  
-  if(start.reachedGoal(goal)){
+
+  if (start.reachedGoal(goal)) {
     setLevel();
   }
-  
+
   a.setPosition(400, height-20); 
   b.setPosition(200, height-20);
   c.setPosition(300, height-200);
+  
+  checkForces();
 }
 
 
@@ -170,15 +174,26 @@ void keyReleased() {
       aC.addBody(x.getShape());
       aC.addBody(start_Joints.js.get(0).getBody2());
       aC.addBody(start_Joints.js.get(1).getBody2());    
-        //catch the index out of bounds 
-        //exception. happens when you try to add a goo,
-        //but you are not connected to two goos. Only one
-              /////////////////CHANGE THIS!!!!!!!!!!!!!!!!!!!!!!!!
+      //catch the index out of bounds 
+      //exception. happens when you try to add a goo,
+      //but you are not connected to two goos. Only one
+      /////////////////CHANGE THIS!!!!!!!!!!!!!!!!!!!!!!!!
       world.add(aC);
+      cvj.add(aC);
       x.connected = true;
     }
     catch(IndexOutOfBoundsException e) {
       world.remove(x.getShape());
+    }
+  }
+}
+
+
+void checkForces() {
+  if(cvj.size() > 0){System.out.println(cvj.get(0).getReactionForceX() + cvj.get(0).getReactionForceY());}
+  for (FConstantVolumeJoint y : cvj) {
+    if (y.getReactionForceX() > 300) {
+      y.removeFromWorld();
     }
   }
 }
