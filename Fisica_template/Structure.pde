@@ -34,12 +34,30 @@ class Structure {
     }
     return ans;
   }
-  
-  public int size(){
+
+  public int size() {
     return gooo.size();
   }
-  
-  public Goo get(int x){
+
+  public Goo get(int x) {
     return gooo.get(x);
+  }
+
+  public void checkForces() {
+    for (Goo y : gooo) {
+      if (y.shape.getVelocityY()>10) {
+        y.shape.setVelocity(0, 500);
+      }
+      if (y.shape.getVelocityY()>20) {
+        y.shape.setFill(400, 20, 20);
+        y.connected = false;
+        for(FConstantVolumeJoint x: y.getJoints()){
+          x.removeFromWorld();
+        }
+      }
+      if(y.shape.getY() > height-30){
+        y.shape.setVelocity(0,0);
+      }
+    }
   }
 }

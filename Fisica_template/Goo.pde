@@ -2,12 +2,14 @@ public class Goo extends FBody {
   FCircle shape;
   boolean connected;
   boolean start;
+  ArrayList<FConstantVolumeJoint> joints;
 
   public Goo() {
     shape = new FCircle(40);
     shape.setDensity(200);
     connected = true;
     start = false;
+    joints = new ArrayList<FConstantVolumeJoint>();
   }
 
   public Goo(FCircle circle) {
@@ -15,6 +17,7 @@ public class Goo extends FBody {
     shape.setDensity(200);
     connected = false;
     start = false;
+    joints = new ArrayList<FConstantVolumeJoint>();
   }
 
   public Goo(boolean bool) {
@@ -22,6 +25,7 @@ public class Goo extends FBody {
     shape.setDensity(200);
     connected = bool;
     start = false;
+    joints = new ArrayList<FConstantVolumeJoint>();
   }
 
   void draw() {
@@ -65,5 +69,9 @@ public class Goo extends FBody {
 
   public void setGrabbable(boolean bool) {
     shape.setGrabbable(bool);
+  }
+  
+  public ArrayList<FConstantVolumeJoint> getJoints(){
+    return joints;
   }
 }
