@@ -52,7 +52,6 @@ class Structure {
         y.shape.setFill(400, 20, 20);
         y.connected = false;
         for(FConstantVolumeJoint x: y.getJoints()){
-          delay(1);
           x.removeFromWorld();
         }
       }
