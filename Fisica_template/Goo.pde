@@ -10,6 +10,9 @@ public class Goo extends FBody {
     connected = true;
     start = false;
     joints = new ArrayList<FConstantVolumeJoint>();
+    PImage img;
+    img = loadImage("goo.png");
+    shape.attachImage(img);
   }
 
   public Goo(FCircle circle) {
@@ -18,6 +21,9 @@ public class Goo extends FBody {
     connected = false;
     start = false;
     joints = new ArrayList<FConstantVolumeJoint>();
+    PImage img;
+    img = loadImage("goo.png");
+    shape.attachImage(img);
   }
 
   public Goo(boolean bool) {
@@ -26,6 +32,9 @@ public class Goo extends FBody {
     connected = bool;
     start = false;
     joints = new ArrayList<FConstantVolumeJoint>();
+    PImage img;
+    img = loadImage("goo.png");
+    shape.attachImage(img);
   }
 
   void draw() {
@@ -70,8 +79,8 @@ public class Goo extends FBody {
   public void setGrabbable(boolean bool) {
     shape.setGrabbable(bool);
   }
-  
-  public ArrayList<FConstantVolumeJoint> getJoints(){
+
+  public ArrayList<FConstantVolumeJoint> getJoints() {
     return joints;
   }
 }
