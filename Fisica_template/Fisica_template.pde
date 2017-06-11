@@ -1,4 +1,4 @@
-import fisica.*; //<>// //<>//
+import fisica.*; //<>// //<>// //<>//
 
 FWorld world;
 FBox goal;
@@ -139,7 +139,7 @@ void draw() {
   b.setPosition(200, height-20);
   c.setPosition(300, height-200);
 
-  checkForces();
+  start.checkForces();
 }
 
 
@@ -173,7 +173,8 @@ void keyReleased() {
       aC.setStrokeColor(#F5B502);
       aC.addBody(x.getShape());
       aC.addBody(start_Joints.js.get(0).getBody2());
-      aC.addBody(start_Joints.js.get(1).getBody2());    
+      aC.addBody(start_Joints.js.get(1).getBody2());  
+      x.joints.add(aC);
       //catch the index out of bounds 
       //exception. happens when you try to add a goo,
       //but you are not connected to two goos. Only one
@@ -189,19 +190,21 @@ void keyReleased() {
 }
 
 
-void checkForces() {
+/*void checkForces() {
+  /* try {
+   if (start.size() > 3) {
+   System.out.println(start.get(3).getForceX() + start.get(3).getForceY());
+   start.get(3).getShape().setFill(20,40,20);
+   }
+   
   try {
-    if (start.size() > 3) {
-      System.out.println(start.get(3).getForceX() + start.get(3).getForceY());
-      start.get(3).getShape().setFill(20,40,20);
+    for (Goo y : start) {
+      System.out.println(y.getReactionTorque());
+      if (y.getReactionTorque() > 0) {
+        y.setFill(20,40,20);
+      }
     }
-
-    /*   for (FConstantVolumeJoint y : cvj) {
-     if (y.getReactionForceX() > 300) {
-     y.removeFromWorld();
-     }
-     }*/
   }
   catch(NullPointerException e) {
   }
-}
+}*/
