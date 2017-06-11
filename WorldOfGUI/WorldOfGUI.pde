@@ -1,4 +1,5 @@
 import fisica.*;  //<>//
+import javax.swing.*;
 
 FWorld world;
 FBox goal;
@@ -9,11 +10,10 @@ Goo a, b, c;
 int level = 1;
 ArrayList<FConstantVolumeJoint> cvj;
 int gooLevel=10;
+int score = 0;
 
 public void setLevel() {
-  if (level < 3) {
-    level++;
-  }
+  level++;
 }
 
 void setup() {
@@ -37,6 +37,8 @@ void setup() {
   img = loadImage("pipe.PNG");
   goal.attachImage(img);
   world.add(goal);
+  //
+  gooLevel = 10;
   //
   mouse = new FCircle(20);
   world.add(mouse);
@@ -120,14 +122,28 @@ void draw() {
   }
   start_Joints.checkJoints();
 
-  if(level > 1){
-  textSize(32);
-  text("Level " + (level-1) + " Completed! :)", 10, 30); 
+  if (level > 1) {
+    textSize(32);
+    text("Level " + (level-1) + " Completed! :)", 10, 30);
   }
 
+
+  textSize(32);
+  text("Total score: " + score, 10, 90); 
+
+  textSize(32);
+  text("Goos left: " + gooLevel, 10, 120); 
+
+
   if (start.reachedGoal(goal)) {
-    setup();
-    setLevel();
+    if (level<3) {
+      setScore();
+      setup();
+      setLevel();
+    } else {
+      javax.swing.JOptionPane.showMessageDialog(null, "GAME WON, please restart to play again");
+      noLoop();
+    }
   }
 
   a.setPosition(400, height-20); 
@@ -137,9 +153,17 @@ void draw() {
   start.checkForces();
 
   textSize(32);
-  text("Current Level:" + level, 10, 60);
+  text("Current level: " + level, 10, 60);
+
+  if (gooLevel==0) {
+    javax.swing.JOptionPane.showMessageDialog(null, "GAME LOST, please restart to play again");
+    noLoop();
+  }
 }
 
+void setScore() {
+  score += gooLevel*10;
+}
 
 public Goo addGoo(float x, float y) {
   Goo g = new Goo(false);
