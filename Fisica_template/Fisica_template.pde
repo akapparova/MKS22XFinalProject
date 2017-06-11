@@ -1,17 +1,17 @@
-import fisica.*; //<>// //<>// //<>//
+import fisica.*;  //<>//
 
 FWorld world;
 FBox goal;
-FBox onLevel;
 FCircle mouse;
 Structure start;
 Structure_Joints start_Joints;
 Goo a, b, c;
-int level = 0;
+int level = 1;
 ArrayList<FConstantVolumeJoint> cvj;
+int gooLevel=10;
 
 public void setLevel() {
-  if (level < 2) {
+  if (level < 3) {
     level++;
   }
 }
@@ -28,22 +28,18 @@ void setup() {
   world.remove(world.left);
   world.remove(world.right);
   //
-  goal = new FBox(100, 50);
-  goal.setPosition(300, height-600);
+  goal = new FBox(100, 70);
+  goal.setPosition(300, height-550);
   goal.setStatic(true);
   goal.setFill(10, 150, 10);
   goal.setGrabbable(false);
+  PImage img;
+  img = loadImage("pipe.PNG");
+  goal.attachImage(img);
   world.add(goal);
   //
   mouse = new FCircle(20);
   world.add(mouse);
-  //
-  onLevel = new FBox (50, 50);
-  onLevel.setPosition(700, height-600);
-  onLevel.setStatic(true);
-  onLevel.setFill(12, 12, 12);
-  onLevel.setGrabbable(false);
-  world.add(onLevel);
   //
   start = new Structure();
   start_Joints = new Structure_Joints();
@@ -71,7 +67,7 @@ void setup() {
   aB.setLength(60);
   aB.setStroke(0);
   aB.setFill(#F5B502);
-  aB.setStrokeColor(#F5B502);
+  aB.setStrokeColor(#000000);
   aB.setDrawable(true);
   aB.setFrequency(0.001);
   world.add(aB.x);
@@ -80,7 +76,7 @@ void setup() {
   bC.setLength(60);
   bC.setStroke(0);
   bC.setFill(#F5B502);
-  bC.setStrokeColor(#F5B502);
+  bC.setStrokeColor(#000000);
   bC.setDrawable(true);
   bC.setFrequency(0.001);
   world.add(bC.x);
@@ -89,26 +85,19 @@ void setup() {
   aC.setLength(60);
   aC.setStroke(0);
   aC.setFill(#F5B502);
-  aC.setStrokeColor(#F5B502);
+  aC.setStrokeColor(#000000);
   aC.setDrawable(true);
   aC.setFrequency(0.001);
   world.add(aC.x);
-
-
-  /*
-     start = new FCompound();   
-   start.addBody(a.getShape());
-   start.addBody(b.getShape());
-   start.addBody(c.getShape());
-   world.add(start);
-   */
 }
 
 
 
 
 void draw() {
-  background(255);
+  PImage img;
+  img = loadImage("bg1.png");
+  background(img);
   world.step();
   world.draw();
   mouse.setPosition(mouseX, mouseY);
@@ -121,7 +110,7 @@ void draw() {
       aC.setLength(60);
       aC.setStroke(0);
       aC.setFill(#F5B502);
-      aC.setStrokeColor(#F5B502);
+      aC.setStrokeColor(#000000);
       aC.setDrawable(true);
       aC.setFrequency(0.00000001);
       start_Joints.add(aC);
@@ -131,7 +120,13 @@ void draw() {
   }
   start_Joints.checkJoints();
 
+  if(level > 1){
+  textSize(32);
+  text("Level " + (level-1) + " Completed! :)", 10, 30); 
+  }
+
   if (start.reachedGoal(goal)) {
+    setup();
     setLevel();
   }
 
@@ -140,6 +135,9 @@ void draw() {
   c.setPosition(300, height-200);
 
   start.checkForces();
+
+  textSize(32);
+  text("Current Level:" + level, 10, 60);
 }
 
 
@@ -170,11 +168,12 @@ void keyReleased() {
      catch(NullPointerException e){}*/
     try {
       FConstantVolumeJoint aC = new FConstantVolumeJoint();
-      aC.setStrokeColor(#F5B502);
+      aC.setStrokeColor(#000000);
       aC.addBody(x.getShape());
       aC.addBody(start_Joints.js.get(0).getBody2());
       aC.addBody(start_Joints.js.get(1).getBody2());  
       x.joints.add(aC);
+      aC.setNoFill();
       //catch the index out of bounds 
       //exception. happens when you try to add a goo,
       //but you are not connected to two goos. Only one
@@ -182,29 +181,10 @@ void keyReleased() {
       world.add(aC);
       cvj.add(aC);
       x.connected = true;
+      gooLevel -= 1;
     }
     catch(IndexOutOfBoundsException e) {
       world.remove(x.getShape());
     }
   }
 }
-
-
-/*void checkForces() {
-  /* try {
-   if (start.size() > 3) {
-   System.out.println(start.get(3).getForceX() + start.get(3).getForceY());
-   start.get(3).getShape().setFill(20,40,20);
-   }
-   
-  try {
-    for (Goo y : start) {
-      System.out.println(y.getReactionTorque());
-      if (y.getReactionTorque() > 0) {
-        y.setFill(20,40,20);
-      }
-    }
-  }
-  catch(NullPointerException e) {
-  }
-}*/

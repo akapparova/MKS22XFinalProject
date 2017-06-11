@@ -28,7 +28,7 @@ class Structure {
   public boolean reachedGoal(FBox reached) {
     boolean ans = false;
     for (Goo g : gooo) {
-      if (g.isTouchingBody(reached)) {
+      if (g.shape.isTouchingBody(reached)) {
         ans = true;
       }
     }
@@ -48,10 +48,11 @@ class Structure {
       if (y.shape.getVelocityY()>10) {
         y.shape.setVelocity(0, 500);
       }
-      if (y.shape.getVelocityY()>20) {
+      if (y.shape.getVelocityY()>15) {
         y.shape.setFill(400, 20, 20);
         y.connected = false;
         for(FConstantVolumeJoint x: y.getJoints()){
+          delay(1);
           x.removeFromWorld();
         }
       }
