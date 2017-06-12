@@ -11,16 +11,23 @@
 ## Features/Instructions
 Instructions:
 * Import Fisica library into Processing <http://www.ricardmarxer.com/fisica/>
-* Run Fisica_Template/Fisica_Template.pde in the Processing IDE
-* Press 'G' key to add goo to your structure
+* Run WorldOfGUI/WorldOfGUI.pde in the Processing IDE
+* Press 'G' key to add goo to your structure (you may need to click on the processing window when putting down your first goo)
 
 Features:
 * Ability to build structures from goo
-* other stuff
+* 3 levels
+* Score counter (each goo leftover gives you 10 points)
 
 ## Bugs
+* Physics is not always perfect
 
 ## Development Log
 
 ##### 06/05/17
 * Player can add goo to structure and build towards the top
+
+#### 06/11/17
+* Structure breaks apart when there is too much force/momentum on the connections
+* Added UI/score & level system
+* Finished project
