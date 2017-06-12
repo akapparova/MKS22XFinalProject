@@ -11,7 +11,9 @@
 ## Instructions
 * Import Fisica library into Processing <http://www.ricardmarxer.com/fisica/>
 * Run WorldOfGUI/WorldOfGUI.pde in the Processing IDE
+* Hover mouse over 2 goos that you want to connect
 * Press 'G' key to add goo to your structure (you may need to click on the processing window when putting down your first goo)
+* If you hovered over a goo but no longer want to to connect it, move your mouse away from it
 
 ## Features
 * Ability to build structures from goo
@@ -27,7 +29,11 @@
 ##### 06/05/17
 * Player can add goo to structure and build towards the top
 
-#### 06/11/17
+##### 06/11/17
 * Structure breaks apart when there is too much force/momentum on the connections
 * Added UI/score & level system
 * Finished project
+
+
+## UML Diagram
+![alt text](https://raw.githubusercontent.com/akapparova/MKS22XFinalProject/master/WorldOfGUI/Capture.PNG "UML Diagram")
