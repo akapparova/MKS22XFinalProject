@@ -189,7 +189,7 @@ void draw() {
       setLevel();
       setup();
     } else {
-      javax.swing.JOptionPane.showMessageDialog(null, "GAME WON, please restart to play again");
+      javax.swing.JOptionPane.showMessageDialog(null, "GAME WON, please restart to play again" + '\n' + "Score: " + score);
       noLoop();
     }
   }
