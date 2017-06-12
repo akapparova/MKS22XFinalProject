@@ -48,15 +48,30 @@ class Structure {
       if (y.shape.getVelocityY()>10) {
         y.shape.setVelocity(0, 500);
       }
-      if (y.shape.getVelocityY()>15) {
+      if (y.shape.getVelocityY()>25) {
         y.shape.setFill(400, 20, 20);
         y.connected = false;
-        for(FConstantVolumeJoint x: y.getJoints()){
+        for (FConstantVolumeJoint x : y.getJoints()) {
           x.removeFromWorld();
         }
       }
-      if(y.shape.getY() > height-30){
-        y.shape.setVelocity(0,0);
+      if (y.shape.getY() > height-30) {
+        y.shape.setVelocity(0, 0);
+      }
+    }
+  }
+
+  public void touch(FBox z) {
+    for (Goo y : gooo) {
+      if (y.shape.isTouchingBody(z)) {
+        y.shape.setFill(400, 20, 20);
+        y.connected = false;
+        for (FConstantVolumeJoint x : y.getJoints()) {
+          x.removeFromWorld();
+        }
+      }
+      if (y.shape.getY() > height-30) {
+        y.shape.setVelocity(0, 0);
       }
     }
   }
