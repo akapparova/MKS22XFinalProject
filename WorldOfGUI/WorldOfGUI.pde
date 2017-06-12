@@ -9,8 +9,9 @@ Structure_Joints start_Joints;
 Goo a, b, c;
 int level = 1;
 ArrayList<FConstantVolumeJoint> cvj;
-int gooLevel=10;
+int gooLevel;
 int score = 0;
+FBox plat;
 
 public void setLevel() {
   level++;
@@ -37,8 +38,9 @@ void setup() {
   img = loadImage("pipe.PNG");
   goal.attachImage(img);
   world.add(goal);
-  //
-  gooLevel = 10;
+  if (level == 3) {
+    goal.setPosition(950, height-410);
+  }
   //
   mouse = new FCircle(20);
   world.add(mouse);
@@ -52,6 +54,7 @@ void setup() {
   a.setPosition(400, height-20); 
   b.setPosition(200, height-20);
   c.setPosition(300, height-200);
+  //
   world.add(a.getShape());
   world.add(b.getShape());
   world.add(c.getShape());
@@ -91,15 +94,52 @@ void setup() {
   aC.setDrawable(true);
   aC.setFrequency(0.001);
   world.add(aC.x);
+  //
+  gooLevel = (3 + (level * 2));
+  if (level == 3) {
+    gooLevel += 6;
+  }
+  //
+  if (level==2) {
+    plat = new FBox(740, 120);
+    plat.setPosition(0, 270);
+    plat.setStatic(true);
+    plat.setGrabbable(false);
+    plat.setNoFill();
+    plat.setStrokeWeight(0);
+    world.add(plat);
+  }
+  if (level==3) {
+    plat = new FBox(250, 200);
+    plat.setPosition(930, height-100);
+    plat.setStatic(true);
+    plat.setGrabbable(false);
+    plat.setNoFill();
+    plat.setStrokeWeight(0);
+    world.add(plat);
+  }
 }
 
 
 
 
 void draw() {
-  PImage img;
-  img = loadImage("bg1.png");
-  background(img);
+  background(255);
+  if (level == 1) {
+    PImage img;
+    img = loadImage("bg1.png");
+    background(img);
+  }
+  if (level == 2) {
+    PImage img2;
+    img2 = loadImage("bg3.png");
+    background(img2);
+  } 
+  if (level == 3) {
+    PImage img3;
+    img3 = loadImage("bg2.PNG");
+    background(img3);
+  }
   world.step();
   world.draw();
   mouse.setPosition(mouseX, mouseY);
@@ -138,8 +178,8 @@ void draw() {
   if (start.reachedGoal(goal)) {
     if (level<3) {
       setScore();
-      setup();
       setLevel();
+      setup();
     } else {
       javax.swing.JOptionPane.showMessageDialog(null, "GAME WON, please restart to play again");
       noLoop();
@@ -158,6 +198,21 @@ void draw() {
   if (gooLevel==0) {
     javax.swing.JOptionPane.showMessageDialog(null, "GAME LOST, please restart to play again");
     noLoop();
+  }
+
+  if (level == 2) {
+    start.touch(plat);
+  }
+
+  if (level == 2) {
+    a.setPosition(450, height-20); 
+    b.setPosition(250, height-20);
+    c.setPosition(350, height-190);
+  }
+  if (level == 3) {
+    a.setPosition(350, height-150); 
+    b.setPosition(200, height-150);
+    c.setPosition(275, height-250);
   }
 }
 
