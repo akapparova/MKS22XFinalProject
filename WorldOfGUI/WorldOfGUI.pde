@@ -11,7 +11,7 @@ int level = 1;
 ArrayList<FConstantVolumeJoint> cvj;
 int gooLevel;
 int score = 0;
-FBox plat;
+FBox plat, plat2;
 
 public void setLevel() {
   level++;
@@ -39,7 +39,7 @@ void setup() {
   goal.attachImage(img);
   world.add(goal);
   if (level == 3) {
-    goal.setPosition(950, height-410);
+    goal.setPosition(775, height-550);
   }
   //
   mouse = new FCircle(20);
@@ -101,7 +101,7 @@ void setup() {
   }
   //
   if (level==2) {
-    plat = new FBox(740, 120);
+    plat = new FBox(730, 150);
     plat.setPosition(0, 270);
     plat.setStatic(true);
     plat.setGrabbable(false);
@@ -110,13 +110,21 @@ void setup() {
     world.add(plat);
   }
   if (level==3) {
-    plat = new FBox(250, 200);
-    plat.setPosition(930, height-100);
+    plat = new FBox(750, 150);
+    plat.setPosition(0, 270);
     plat.setStatic(true);
     plat.setGrabbable(false);
     plat.setNoFill();
     plat.setStrokeWeight(0);
     world.add(plat);
+
+    plat2 = new FBox(400, 150);
+    plat2.setPosition(830, 270);
+    plat2.setStatic(true);
+    plat2.setGrabbable(false);
+    plat2.setNoFill();
+    plat2.setStrokeWeight(0);
+    world.add(plat2);
   }
 }
 
@@ -204,15 +212,20 @@ void draw() {
     start.touch(plat);
   }
 
+  if (level == 3) {
+    start.touch(plat);
+    start.touch(plat2);
+  }
+
   if (level == 2) {
-    a.setPosition(450, height-20); 
-    b.setPosition(250, height-20);
-    c.setPosition(350, height-190);
+    a.setPosition(500, height-20); 
+    b.setPosition(300, height-20);
+    c.setPosition(400, height-190);
   }
   if (level == 3) {
-    a.setPosition(350, height-150); 
-    b.setPosition(200, height-150);
-    c.setPosition(275, height-250);
+    a.setPosition(500, height-20); 
+    b.setPosition(300, height-20);
+    c.setPosition(400, height-190);
   }
 }
 
@@ -253,6 +266,11 @@ void keyReleased() {
       aC.addBody(start_Joints.js.get(1).getBody2());  
       x.joints.add(aC);
       aC.setNoFill();
+      if (level<3) {
+        aC.setFrequency(10000);
+      } else {
+        aC.setFrequency(10000);
+      }
       //catch the index out of bounds 
       //exception. happens when you try to add a goo,
       //but you are not connected to two goos. Only one
