@@ -45,18 +45,18 @@ class Structure {
 
   public void checkForces() {
     for (Goo y : gooo) {
-      if (y.shape.getVelocityY()>10) {
-        y.shape.setVelocity(0, 500);
-      }
-      if (y.shape.getVelocityY()>25) {
+      if (y.shape.getVelocityY()>2000) {
         y.shape.setFill(400, 20, 20);
-        y.connected = false;
         for (FConstantVolumeJoint x : y.getJoints()) {
           x.removeFromWorld();
         }
       }
       if (y.shape.getY() > height-30) {
         y.shape.setVelocity(0, 0);
+        if (!y.start)
+        {
+          y.connected = false;
+        }
       }
     }
   }

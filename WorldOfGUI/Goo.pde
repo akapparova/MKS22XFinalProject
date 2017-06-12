@@ -30,7 +30,7 @@ public class Goo extends FBody {
     shape = new FCircle(40);
     shape.setDensity(200);
     connected = bool;
-    start = false;
+    start = bool;
     joints = new ArrayList<FConstantVolumeJoint>();
     PImage img;
     img = loadImage("goo.png");
